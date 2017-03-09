@@ -12,6 +12,7 @@ typedef struct {
 symb symbs[100];
 symb symbs1[100];
 int k=0;
+int ktemp=0;
 int l=0;
 int i;
 
@@ -29,11 +30,11 @@ METHS: METHS METH {}
 METH: DECL {}
 | FUNC {} ;
 
-DECL: TYPE VARS ';' { printf("TYPE - %s\n", $1); };
+DECL: TYPE VARS ';' { printf("TYPE - %s\n", $1);while(ktemp>k){strcpy(symbs[k].type,$1);k++;}};
 VARS: INID ',' VARS {}
-| INID { $$ = $1; printf("%s\n", $1); };
-INID: ID { $$ = $1; }
-| ID '=' EXPR { $$ = $1; };
+| INID { $$ = $1;};
+INID: ID { $$ = $1;strcpy(symbs[ktemp].name,$1);ktemp++;}
+| ID '=' EXPR { $$ = $1;strcpy(symbs[ktemp].name,$1);ktemp++;};
 
 FUNC: TYPE ID '(' ARGS ')' '{' STMTS '}' { printf("FUNC - %s\n", $2); strcpy(symbs1[l].name,$2);strcpy(symbs1[l].type,"Function"); l++;};
 ARGS: TYPE ID | TYPE ID ',' ARGS | ;
@@ -53,7 +54,11 @@ F: NUM | ID ;
 int main()
 {
 	yyparse();
-	
+	printf("First Symbol Table\nName\tType\n");
+	for(i=0;i<k;i++)
+	{
+		printf("%s\t%s\n",symbs[i].name,symbs[i].type);
+	}
 	printf("Second Symbol Table\nName\tType\n");
 	for(i=0;i<l;i++)
 	{
