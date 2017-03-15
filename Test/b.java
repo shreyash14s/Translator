@@ -2,6 +2,11 @@ class B {
 	int foo() {
 		int a = 1,c;
 		int b = 3;
-		println(a+b);
+		System.out.println(a+b);
 	}
+	void main(String[] args)
+	{
+		foo();
+	}
+	
 }

@@ -30,17 +30,19 @@ METHS: METHS METH {}
 METH: DECL {}
 | FUNC {} ;
 
-DECL: TYPE VARS ';' { printf("TYPE - %s\n", $1);while(ktemp>k){strcpy(symbs[k].type,$1);k++;}};
+DECL: TYPE VARS ';' { while(ktemp>k){strcpy(symbs[k].type,$1);k++;}}
+| TYPE '[' ']' VARS ';' {  while(ktemp>k){strcpy(symbs[k].type,$1);strcat(symbs[k].type," array");k++;}}
+;
 VARS: INID ',' VARS {}
 | INID { $$ = $1;};
 INID: ID { $$ = $1;strcpy(symbs[ktemp].name,$1);ktemp++;}
 | ID '=' EXPR { $$ = $1;strcpy(symbs[ktemp].name,$1);ktemp++;};
 
-FUNC: TYPE ID '(' ARGS ')' '{' STMTS '}' { printf("FUNC - %s\n", $2); strcpy(symbs1[l].name,$2);strcpy(symbs1[l].type,"Function"); l++;};
+FUNC: TYPE ID '(' ARGS ')' '{' STMTS '}' {  strcpy(symbs1[l].name,$2);strcpy(symbs1[l].type,"Function"); l++;};
 ARGS: TYPE ID | TYPE ID ',' ARGS | ;
 STMTS: STMTS STMT | ;
 STMT: DECL | FNCALL | ASGN ;
-FNCALL: FNAME '(' PARAMS ')' ';' { printf("Calling - %s\n", $1); strcpy(symbs1[l].name,$1);strcpy(symbs1[l].type,"Function"); l++;};
+FNCALL: FNAME '(' PARAMS ')' ';' {  };
 FNAME: ID { /* Should handle obj.func or Class.func */ };
 PARAMS: PARAMS2 | ;
 PARAMS2: EXPR ',' PARAMS2 | EXPR ;
