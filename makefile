@@ -1,11 +1,14 @@
+# YACCFLAGS=-Wall
+DEBUG=--debug --verbose
 trans: lex.yy.c y.tab.c y.tab.h
-	gcc lex.yy.c y.tab.c -ll -ly -o trans
+	gcc lex.yy.c y.tab.c -ll -ly -o trans -g -w
 
-lex.yy.c: f.l y.tab.h
-	lex f.l
+lex.yy.c: l.l y.tab.h
+	lex l.l
 
-y.tab.c: f.y
-	yacc f.y -d
+y.tab.c: y.y
+	yacc y.y -d ${YACCFLAGS} ${DEBUG}
 
-y.tab.h: f.y
-	yacc f.y -d
+y.tab.h: y.y
+	yacc y.y -d ${YACCFLAGS} ${DEBUG}
+

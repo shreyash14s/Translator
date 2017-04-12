@@ -1,0 +1,21 @@
+println - handle stuff like 'println("hi" + a + "hey")' as 'cout << "hi" << a << "hey"' rather than 'cout << "hi + a + "hey"'
+
+classes - handle inheritance/extends/implements ??
+
+handle arrays - declarations
+
+ASGN still not working. FIX THIS !!!
+
+If the primary (public) class has only one method (main method), then remove the class construct and rename the main method as 'void main()' (OR) PrimaryClass.main()
+
+println -> print '\n' also
+
+import something.java.IO -> #include<iostream>
+
+"using namespace std;" -> what about this?
+
+
+IMPORTANT:
+- System.out.println("whatever" + " and all"); 
+	handle these so that "\n" can be added into Java code
+	(gotta modify stuff in lex file so that double quotes for strings can be handled)
