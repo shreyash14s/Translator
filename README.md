@@ -1,9 +1,21 @@
 # Translator
 
-A Java to C++ translator
+A Simple Java to C++ translator
 
-How to run:
-$make
-$./trans <input_java_file>
+### Build
+Create the executable `trans` using the Make.
 
-O/P file: <java_file_name>.cpp
+    make
+
+### Translate
+Run the following command to convert Java code to C++.
+
+    ./trans <input_file>.java
+
+Output is saved to `<input_file>.cpp`
+
+## Contributors
+
+- [Shreyas S Rao](https://github.com/s-s-rao)
+- [Shreyash S Sarnayak](https://github.com/shreyash14s)
+- [Siddharth Srinivasan](https://github.com/siddharths2710)
